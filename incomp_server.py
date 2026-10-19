@@ -8,4 +8,4 @@ with socket.socket() as server:
 
     connection, _ = server.accept()
     with connection:
-        connection.sendall(b"\x01\x02")
+        connection.sendall(b"\x02\x00\x00\x00")

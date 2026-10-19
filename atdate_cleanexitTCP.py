@@ -32,13 +32,14 @@ def udp_client(serverhost, port, debug):
         print(f"Current time: {date}")
 
 def receive_exactly(sock, size):
-    sock.settimeout(5)  # Set a timeout for receiving data
     data = b""
     
     while len(data) < size:
         chunk = sock.recv(size - len(data))
-        #if not chunk:
-        #   raise ConnectionError("Connection closed before receiving expected data")
+        if not chunk:
+            if not data:
+                return data
+            raise ConnectionError("Incomplete time data received from server. Connection may have been closed.")
         data += chunk
     return data
 
@@ -88,8 +89,12 @@ def tcp_client(serverhost, port, debug):
             print(f"Connected to TCP server at {serverhost}:{port}")
 
         while True:
-
+            sock.settimeout(5)  # Set the timeout for receiving data
             data = receive_exactly(sock, 4)
+
+            if len(data) == 0:
+                print("Connection closed by server.")
+                break
 
             if len(data) != 4:
                 raise ValueError("TIME response must exactly be 4 bytes long")
