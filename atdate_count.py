@@ -99,6 +99,9 @@ def tcp_client(serverhost, port, count, debug):
 
             date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(unix_time))
             print(f"Current time: {date}")
+            received_count += 1
+
+        print("Reached the specified count. Closing connection.")
 
 def main():
     parser = argparse.ArgumentParser(
