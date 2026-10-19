@@ -28,8 +28,8 @@ def udp_client(serverhost, port, debug):
         time_Seconds = struct.unpack("!I", data)[0]
         unix_time = time_Seconds - TIME_EPOCH_OFFSET
 
-        date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(unix_time))
-        print(f"Current time: {date}")
+        date = time.strftime("%a %b %d %H:%M:%S %Z %Y", time.localtime(unix_time)).replace(" 0", " ", 1)
+        print(date)
 
 def receive_exactly(sock, size):
     data = b""
@@ -95,8 +95,8 @@ def tcp_client(serverhost, port, debug):
             time_Seconds = struct.unpack("!I", data)[0]
             unix_time = time_Seconds - TIME_EPOCH_OFFSET
 
-            date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(unix_time))
-            print(f"Current time: {date}")
+            date = time.strftime("%a %b %d %H:%M:%S %Z %Y", time.localtime(unix_time)).replace(" 0", " ", 1)
+            print(date)
 
 def main():
     parser = argparse.ArgumentParser(
