@@ -99,7 +99,6 @@ def tcp_client(serverhost, port, count, debug):
 
             date = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(unix_time))
             print(f"Current time: {date}")
-            received_count += 1
 
 def main():
     parser = argparse.ArgumentParser(

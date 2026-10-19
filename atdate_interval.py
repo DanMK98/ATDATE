@@ -142,14 +142,6 @@ def main():
         help="Interval in seconds for sending updates in server mode (default: 1)",
     )
 
-    parser.add_argument(
-        "-n",
-        dest="count",
-        type=int,
-        default=1,
-        help="Number of updates to send in client mode (default: 1)",
-    )
-
     args = parser.parse_args()
 
     if args.mode in ["cu", "ct"] and not args.serverhost:
