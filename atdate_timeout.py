@@ -155,7 +155,7 @@ def main():
         parser.error("Invalid port. Please specify a port between 1 and 65535.")
 
     if args.timeout < 1:
-        parser.error("Timeout must be a non-negative integer for TCP client mode.")
+        parser.error("Timeout must be a positive integer for TCP client mode.")
 
     try:
         if args.mode == "cu":

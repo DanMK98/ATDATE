@@ -78,7 +78,11 @@ def tcp_server(port, debug):
 def tcp_client(serverhost, port, debug):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.settimeout(5)
-        sock.connect((serverhost, port))      
+        sock.connect((serverhost, port))    
+
+        client_seconds = int(time.time()) + TIME_EPOCH_OFFSET
+        data_client = struct.pack("!I", client_seconds)
+        sock.sendall(data_client)  
 
         # Wait for updates without a timeout after connecting
         sock.settimeout(None)
